@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vaibhav Gupta | Data Scientist & AI Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #040608;
+  --surface: #0b0f14;
+  --card: #111820;
+  --border: #1e2d3d;
+  --accent: #00d4ff;
+  --accent2: #7c3aed;
+  --accent3: #10b981;
+  --text: #e8f0fe;
+  --muted: #6b8ba4;
+  --gold: #f59e0b;
+  --danger: #ef4444;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Mono',monospace;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  cursor:none;
+}
+/* Custom Cursor */
+.cursor{
+  position:fixed;width:10px;height:10px;
+  background:var(--accent);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transition:transform .1s;mix-blend-mode:screen;
+}
+.cursor-ring{
+  position:fixed;width:36px;height:36px;
+  border:1px solid var(--accent);border-radius:50%;
+  pointer-events:none;z-index:9998;
+  transition:transform .15s,width .2s,height .2s;
+  mix-blend-mode:screen;
+}
+/* Grid Background */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:
+    linear-gradient(rgba(0,212,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,212,255,.03) 1px,transparent 1px);
+  background-size:60px 60px;
+  pointer-events:none;z-index:0;
+}
+/* Noise overlay */
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:.4;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;
+  z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem 3rem;
+  background:rgba(4,6,8,.8);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:'Syne',sans-serif;
+  font-weight:800;font-size:1.1rem;
+  letter-spacing:-.02em;
+  color:var(--accent);
+  text-decoration:none;
+}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{
+  color:var(--muted);text-decoration:none;
+  font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--accent);}
+.nav-cta{
+  padding:.5rem 1.2rem;
+  background:transparent;
+  border:1px solid var(--accent);
+  color:var(--accent);
+  font-family:'DM Mono',monospace;
+  font-size:.75rem;letter-spacing:.1em;
+  cursor:pointer;transition:all .2s;
+  text-decoration:none;
+}
+.nav-cta:hover{background:var(--accent);color:var(--bg);}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding:8rem 3rem 4rem;
+  position:relative;z-index:1;
+  overflow:hidden;
+}
+.hero-glow{
+  position:absolute;
+  width:800px;height:800px;
+  background:radial-gradient(circle,rgba(0,212,255,.08) 0%,transparent 70%);
+  top:-200px;right:-200px;
+  pointer-events:none;
+}
+.hero-glow2{
+  position:absolute;
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(124,58,237,.06) 0%,transparent 70%);
+  bottom:-100px;left:-100px;
+  pointer-events:none;
+}
+.hero-content{max-width:900px;}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.4rem 1rem;
+  border:1px solid var(--border);
+  background:rgba(0,212,255,.05);
+  font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:2rem;
+  animation:fadeUp .8s ease forwards;
+}
+.badge-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--accent3);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(3rem,8vw,7rem);
+  font-weight:800;line-height:.95;
+  letter-spacing:-.04em;
+  animation:fadeUp .8s .1s ease both;
+}
+.hero-title span{
+  display:block;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-subtitle{
+  font-family:'Instrument Serif',serif;
+  font-size:1.3rem;font-style:italic;
+  color:var(--muted);margin:1.5rem 0;
+  animation:fadeUp .8s .2s ease both;
+}
+.hero-desc{
+  font-size:.85rem;line-height:1.8;color:var(--muted);
+  max-width:600px;margin-bottom:2.5rem;
+  animation:fadeUp .8s .3s ease both;
+}
+.hero-stats{
+  display:flex;gap:3rem;margin-bottom:3rem;
+  animation:fadeUp .8s .4s ease both;
+}
+.stat-item .stat-num{
+  font-family:'Syne',sans-serif;font-size:2.5rem;font-weight:800;
+  color:var(--accent);letter-spacing:-.04em;
+}
+.stat-item .stat-label{font-size:.7rem;letter-spacing:.15em;color:var(--muted);text-transform:uppercase;}
+.hero-btns{
+  display:flex;gap:1rem;flex-wrap:wrap;
+  animation:fadeUp .8s .5s ease both;
+}
+.btn-primary{
+  padding:.9rem 2rem;
+  background:var(--accent);color:var(--bg);
+  font-family:'DM Mono',monospace;font-size:.8rem;font-weight:500;
+  letter-spacing:.05em;text-decoration:none;
+  transition:all .2s;display:inline-flex;align-items:center;gap:.5rem;
+  border:none;cursor:pointer;
+}
+.btn-primary:hover{background:#00aacc;transform:translateY(-2px);}
+.btn-outline{
+  padding:.9rem 2rem;
+  background:transparent;
+  border:1px solid var(--border);
+  color:var(--text);
+  font-family:'DM Mono',monospace;font-size:.8rem;
+  letter-spacing:.05em;text-decoration:none;
+  transition:all .2s;display:inline-flex;align-items:center;gap:.5rem;
+  cursor:pointer;
+}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent);}
+
+.hero-terminal{
+  position:absolute;right:3rem;top:50%;transform:translateY(-50%);
+  width:380px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  font-size:.72rem;
+  animation:fadeUp .8s .3s ease both;
+  display:block;
+}
+.terminal-bar{
+  display:flex;align-items:center;gap:.5rem;
+  padding:.7rem 1rem;background:var(--card);border-bottom:1px solid var(--border);
+}
+.t-dot{width:10px;height:10px;border-radius:50%;}
+.t-dot:nth-child(1){background:#ff5f57}
+.t-dot:nth-child(2){background:#febc2e}
+.t-dot:nth-child(3){background:#28c840}
+.terminal-title{margin-left:auto;color:var(--muted);font-size:.65rem;letter-spacing:.1em;}
+.terminal-body{padding:1.2rem;line-height:2;}
+.t-line{display:block;}
+.t-prompt{color:var(--accent3);}
+.t-cmd{color:var(--text);}
+.t-out{color:var(--muted);padding-left:1rem;}
+.t-out.accent{color:var(--accent);}
+.t-out.gold{color:var(--gold);}
+.t-out.violet{color:#a78bfa;}
+.blink{animation:blink 1s step-end infinite;}
+@keyframes blink{50%{opacity:0}}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* SECTION */
+section{position:relative;z-index:1;padding:6rem 3rem;}
+.section-tag{
+  font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:1rem;
+  display:flex;align-items:center;gap:.7rem;
+}
+.section-tag::after{
+  content:'';flex:1;height:1px;background:var(--border);
+}
+.section-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(2rem,4vw,3.5rem);
+  font-weight:800;letter-spacing:-.03em;
+  margin-bottom:3rem;line-height:1;
+}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;}
+.skill-card{
+  padding:1.5rem;
+  background:var(--surface);border:1px solid var(--border);
+  transition:all .3s;position:relative;overflow:hidden;
+}
+.skill-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(0,212,255,.05),transparent);
+  opacity:0;transition:opacity .3s;
+}
+.skill-card:hover{border-color:var(--accent);transform:translateY(-4px);}
+.skill-card:hover::before{opacity:1;}
+.skill-category{
+  font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:1rem;
+}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.5rem;}
+.skill-tag{
+  padding:.3rem .8rem;
+  background:var(--card);
+  border:1px solid var(--border);
+  font-size:.7rem;color:var(--muted);
+  transition:all .2s;
+}
+.skill-tag:hover{border-color:var(--accent);color:var(--accent);}
+
+/* EXPERIENCE */
+.exp-timeline{position:relative;}
+.exp-timeline::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  width:1px;background:linear-gradient(to bottom,var(--accent),var(--accent2),transparent);
+}
+.exp-item{
+  padding:0 0 3rem 3rem;position:relative;
+}
+.exp-dot{
+  position:absolute;left:-5px;top:6px;
+  width:10px;height:10px;border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 20px var(--accent);
+}
+.exp-meta{
+  display:flex;align-items:center;gap:1rem;margin-bottom:.5rem;
+  flex-wrap:wrap;
+}
+.exp-role{
+  font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;
+}
+.exp-company{color:var(--accent);font-size:.8rem;}
+.exp-duration{
+  margin-left:auto;
+  padding:.2rem .7rem;
+  background:var(--card);border:1px solid var(--border);
+  font-size:.65rem;letter-spacing:.1em;color:var(--muted);
+}
+.exp-location{color:var(--muted);font-size:.75rem;margin-bottom:1rem;}
+.exp-bullets{list-style:none;}
+.exp-bullets li{
+  font-size:.8rem;color:var(--muted);line-height:1.8;
+  padding-left:1rem;position:relative;margin-bottom:.3rem;
+}
+.exp-bullets li::before{
+  content:'▸';position:absolute;left:0;color:var(--accent);
+}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem;}
+.project-card{
+  background:var(--surface);border:1px solid var(--border);
+  padding:2rem;position:relative;overflow:hidden;
+  transition:all .3s;
+}
+.project-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;
+  height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));
+  transform:scaleX(0);transform-origin:left;transition:transform .3s;
+}
+.project-card:hover{border-color:rgba(0,212,255,.3);transform:translateY(-4px);}
+.project-card:hover::after{transform:scaleX(1);}
+.project-num{
+  font-family:'Syne',sans-serif;font-size:3rem;font-weight:800;
+  color:var(--border);position:absolute;top:1rem;right:1.5rem;
+  letter-spacing:-.04em;
+}
+.project-tech{
+  display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem;
+}
+.tech-tag{
+  padding:.2rem .6rem;
+  background:rgba(0,212,255,.08);
+  border:1px solid rgba(0,212,255,.2);
+  font-size:.65rem;color:var(--accent);
+}
+.project-title{
+  font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;
+  margin-bottom:.8rem;
+}
+.project-desc{font-size:.78rem;color:var(--muted);line-height:1.7;margin-bottom:1.5rem;}
+.project-metric{
+  display:inline-flex;align-items:center;gap:.4rem;
+  padding:.3rem .8rem;
+  background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);
+  font-size:.7rem;color:var(--accent3);
+}
+
+/* EDUCATION */
+.edu-grid{display:grid;gap:1.5rem;}
+.edu-card{
+  display:grid;grid-template-columns:auto 1fr;gap:2rem;
+  padding:2rem;background:var(--surface);border:1px solid var(--border);
+  transition:border-color .3s;
+}
+.edu-card:hover{border-color:var(--accent);}
+.edu-year{
+  font-family:'Syne',sans-serif;font-size:.7rem;font-weight:700;
+  color:var(--muted);letter-spacing:.1em;writing-mode:vertical-rl;
+  text-orientation:mixed;
+}
+.edu-degree{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.3rem;}
+.edu-institution{color:var(--accent);font-size:.8rem;margin-bottom:.5rem;}
+.edu-detail{font-size:.75rem;color:var(--muted);line-height:1.7;}
+.edu-badge{
+  display:inline-flex;align-items:center;gap:.4rem;margin-top:.7rem;
+  padding:.3rem .8rem;
+  background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);
+  font-size:.65rem;color:var(--gold);
+}
+
+/* AWARDS */
+.awards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;}
+.award-card{
+  padding:2rem;background:var(--surface);border:1px solid var(--border);
+  position:relative;overflow:hidden;transition:all .3s;
+}
+.award-card:hover{border-color:var(--gold);transform:translateY(-4px);}
+.award-icon{font-size:2rem;margin-bottom:1rem;}
+.award-title{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:.5rem;}
+.award-desc{font-size:.75rem;color:var(--muted);line-height:1.7;}
+
+/* LINKS */
+.links-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;}
+.link-card{
+  display:flex;align-items:center;gap:1rem;
+  padding:1.2rem 1.5rem;
+  background:var(--surface);border:1px solid var(--border);
+  text-decoration:none;color:var(--text);
+  transition:all .3s;
+}
+.link-card:hover{border-color:var(--accent);color:var(--accent);transform:translateX(4px);}
+.link-icon{
+  width:40px;height:40px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--card);border:1px solid var(--border);
+  font-size:1.2rem;flex-shrink:0;
+}
+.link-info .link-label{font-size:.65rem;letter-spacing:.15em;color:var(--muted);text-transform:uppercase;}
+.link-info .link-url{font-size:.78rem;margin-top:.2rem;}
+
+/* CONTACT */
+.contact-wrapper{
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;
+  align-items:center;
+}
+.contact-info .contact-item{
+  display:flex;align-items:center;gap:1rem;
+  padding:1rem 0;border-bottom:1px solid var(--border);
+  font-size:.8rem;color:var(--muted);
+}
+.contact-item a{color:var(--muted);text-decoration:none;transition:color .2s;}
+.contact-item a:hover{color:var(--accent);}
+.contact-item-icon{color:var(--accent);font-size:1rem;width:20px;text-align:center;}
+.contact-cta{
+  text-align:center;padding:3rem;
+  background:linear-gradient(135deg,rgba(0,212,255,.05),rgba(124,58,237,.05));
+  border:1px solid var(--border);
+}
+.contact-cta-title{
+  font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;
+  letter-spacing:-.03em;margin-bottom:1rem;
+}
+.contact-cta-sub{font-size:.8rem;color:var(--muted);margin-bottom:2rem;line-height:1.7;}
+
+/* FOOTER */
+footer{
+  padding:2rem 3rem;
+  border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:.7rem;color:var(--muted);
+  position:relative;z-index:1;
+}
+
+/* SCROLL INDICATOR */
+.scroll-indicator{
+  position:fixed;top:0;left:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  z-index:200;transition:width .1s;
+}
+
+/* DOWNLOAD BUTTON FLOATING */
+.float-download{
+  position:fixed;bottom:2rem;right:2rem;
+  z-index:100;
+  display:flex;flex-direction:column;gap:.7rem;
+}
+.float-btn{
+  padding:.8rem 1.4rem;
+  display:flex;align-items:center;gap:.6rem;
+  font-family:'DM Mono',monospace;font-size:.72rem;
+  text-decoration:none;cursor:pointer;border:none;
+  font-weight:500;letter-spacing:.05em;
+  transition:all .2s;
+  box-shadow:0 8px 30px rgba(0,0,0,.5);
+}
+.float-btn.primary{background:var(--accent);color:var(--bg);}
+.float-btn.primary:hover{background:#00aacc;transform:translateY(-2px);}
+.float-btn.secondary{background:var(--surface);border:1px solid var(--border);color:var(--text);}
+.float-btn.secondary:hover{border-color:var(--accent);color:var(--accent);}
+
+/* Responsive */
+@media(max-width:900px){
+  .hero{flex-direction:column;padding:7rem 1.5rem 4rem;}
+  .hero-terminal{position:static;transform:none;width:100%;margin-top:2rem;}
+  nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
+  section{padding:4rem 1.5rem;}
+  .contact-wrapper{grid-template-columns:1fr;}
+  footer{flex-direction:column;gap:1rem;text-align:center;}
+}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="scroll-indicator" id="scrollIndicator"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">VG.</a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- FLOATING DOWNLOAD -->
+<div class="float-download">
+  <button class="float-btn primary" onclick="downloadCV()">⬇ Download CV</button>
+  <a href="https://portfolio2-0-vmpr.onrender.com" target="_blank" class="float-btn secondary">🌐 Portfolio</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="badge-dot"></span> Available for MNC Opportunities — 90+ LPA Target</div>
+    <h1 class="hero-title">
+      VAIBHAV<br><span>GUPTA</span>
+    </h1>
+    <p class="hero-subtitle">Data Scientist & AI Engineer</p>
+    <p class="hero-desc">Results-driven Data Science & AI professional with expertise in Python, SQL, Machine Learning, and Business Intelligence. Honored by HCL Vice President for academic excellence. Mentored 70+ students in industry-ready Data Science skills.</p>
+    <div class="hero-stats">
+      <div class="stat-item"><div class="stat-num">70+</div><div class="stat-label">Students Mentored</div></div>
+      <div class="stat-item"><div class="stat-num">95%</div><div class="stat-label">Model Precision</div></div>
+      <div class="stat-item"><div class="stat-num">5+</div><div class="stat-label">Live Projects</div></div>
+    </div>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="downloadCV()">⬇ Download CV</button>
+      <a href="https://github.com/BEunique564/VAIBHAV-DATA-SCIENCE" target="_blank" class="btn-outline">⌥ GitHub</a>
+      <a href="https://www.linkedin.com/in/vaibhav-gupta" target="_blank" class="btn-outline">in LinkedIn</a>
+    </div>
+  </div>
+
+  <div class="hero-terminal">
+    <div class="terminal-bar">
+      <div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>
+      <span class="terminal-title">vaibhav@data-scientist ~ </span>
+    </div>
+    <div class="terminal-body">
+      <span class="t-line"><span class="t-prompt">$ </span><span class="t-cmd">whoami</span></span>
+      <span class="t-line t-out accent">Vaibhav Gupta — Data Scientist</span>
+      <span class="t-line"><span class="t-prompt">$ </span><span class="t-cmd">cat skills.txt</span></span>
+      <span class="t-line t-out violet">Python | ML | SQL | Power BI | NLP</span>
+      <span class="t-line t-out violet">Spark | Kafka | Databricks | Tableau</span>
+      <span class="t-line"><span class="t-prompt">$ </span><span class="t-cmd">cat achievements.txt</span></span>
+      <span class="t-line t-out gold">🏆 Honored by HCL VP Mr. Sanjay Gupta</span>
+      <span class="t-line t-out gold">🥇 #1 Hackathon @ IIT Kanpur</span>
+      <span class="t-line t-out gold">🎓 Top 2 Nationally in Academics</span>
+      <span class="t-line"><span class="t-prompt">$ </span><span class="t-cmd">./run_career.sh --target=FAANG<span class="blink">_</span></span></span>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-tag">01 / Core Competencies</div>
+  <h2 class="section-title">Technical Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-category">Languages & Core</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">SQL (MySQL)</span>
+        <span class="skill-tag">R</span>
+        <span class="skill-tag">PostgreSQL</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-category">ML & Data Science</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Scikit-learn</span>
+        <span class="skill-tag">TensorFlow</span>
+        <span class="skill-tag">NumPy</span>
+        <span class="skill-tag">Pandas</span>
+        <span class="skill-tag">Feature Engineering</span>
+        <span class="skill-tag">EDA</span>
+        <span class="skill-tag">NLP</span>
+        <span class="skill-tag">BERT</span>
+        <span class="skill-tag">CNN</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-category">Big Data & Engineering</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Apache Spark</span>
+        <span class="skill-tag">PySpark</span>
+        <span class="skill-tag">Kafka</span>
+        <span class="skill-tag">Hadoop HDFS</span>
+        <span class="skill-tag">Databricks</span>
+        <span class="skill-tag">CI/CD</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-category">BI & Visualization</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Power BI</span>
+        <span class="skill-tag">Tableau</span>
+        <span class="skill-tag">IBM Cognos</span>
+        <span class="skill-tag">Matplotlib</span>
+        <span class="skill-tag">Seaborn</span>
+        <span class="skill-tag">Google Sheets</span>
+        <span class="skill-tag">Semantic Modeling</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-category">ML Algorithms</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Linear Regression</span>
+        <span class="skill-tag">Logistic Regression</span>
+        <span class="skill-tag">KNN</span>
+        <span class="skill-tag">Decision Trees</span>
+        <span class="skill-tag">Collaborative Filtering</span>
+        <span class="skill-tag">Deep Learning</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-category">Tools & Soft Skills</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Git / GitHub</span>
+        <span class="skill-tag">Jupyter Notebook</span>
+        <span class="skill-tag">Flask</span>
+        <span class="skill-tag">Leadership</span>
+        <span class="skill-tag">Mentoring</span>
+        <span class="skill-tag">Agile</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-tag">02 / Work History</div>
+  <h2 class="section-title">Experience</h2>
+  <div class="exp-timeline">
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-meta">
+        <div>
+          <div class="exp-role">Data Science Mentor</div>
+          <div class="exp-company">Hanumant Technology</div>
+        </div>
+        <div class="exp-duration">6+ Months</div>
+      </div>
+      <div class="exp-location">📍 Lucknow, India</div>
+      <ul class="exp-bullets">
+        <li>Mentored 70+ students in Python, SQL, Machine Learning, and Data Analytics</li>
+        <li>Delivered hands-on projects using real-world datasets aligned with industry workflows</li>
+        <li>Enhanced learner placement readiness through curriculum design and project guidance</li>
+      </ul>
+    </div>
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-meta">
+        <div>
+          <div class="exp-role">Data Science Intern</div>
+          <div class="exp-company">Wayspire</div>
+        </div>
+        <div class="exp-duration">3 Months</div>
+      </div>
+      <div class="exp-location">📍 Delhi, India</div>
+      <ul class="exp-bullets">
+        <li>Developed classification models using Scikit-learn with measurable accuracy improvements</li>
+        <li>Executed data preprocessing, feature selection, and visualisation for business datasets</li>
+        <li>Collaborated on real-world problem statements following agile methodology</li>
+      </ul>
+    </div>
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-meta">
+        <div>
+          <div class="exp-role">Machine Learning Intern</div>
+          <div class="exp-company">EliteTech</div>
+        </div>
+        <div class="exp-duration">1 Month</div>
+      </div>
+      <div class="exp-location">📍 Remote</div>
+      <ul class="exp-bullets">
+        <li>Implemented Linear Regression & KNN models for predictive analytics</li>
+        <li>Evaluated model performance using industry-standard metrics</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-tag">03 / Build Log</div>
+  <h2 class="section-title">Key Projects</h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-num">01</div>
+      <div class="project-tech">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">Scikit-learn</span>
+        <span class="tech-tag">Flask</span>
+      </div>
+      <div class="project-title">Personalised Recommendation System</div>
+      <div class="project-desc">Built a movie recommendation engine using collaborative filtering; deployed via Flask API.</div>
+      <div class="project-metric">📈 +20% recommendation accuracy</div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">02</div>
+      <div class="project-tech">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">SQL</span>
+        <span class="tech-tag">ML Pipeline</span>
+      </div>
+      <div class="project-title">Fraud Detection Pipeline</div>
+      <div class="project-desc">ML pipeline to detect fraudulent transactions; achieved 95% precision and reduced false positives.</div>
+      <div class="project-metric">🎯 95% Precision</div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">03</div>
+      <div class="project-tech">
+        <span class="tech-tag">Power BI</span>
+        <span class="tech-tag">Python</span>
+      </div>
+      <div class="project-title">Customer Churn Prediction</div>
+      <div class="project-desc">Predicted telecom customer churn with 88% accuracy; dashboards helped reduce attrition by 12%.</div>
+      <div class="project-metric">📉 -12% Attrition</div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">04</div>
+      <div class="project-tech">
+        <span class="tech-tag">NLP</span>
+        <span class="tech-tag">BERT</span>
+        <span class="tech-tag">Transformers</span>
+      </div>
+      <div class="project-title">Sentiment Analysis Chatbot</div>
+      <div class="project-desc">Implemented chatbot using BERT; automated 60% of queries with high satisfaction scores.</div>
+      <div class="project-metric">🤖 60% Query Automation</div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">05</div>
+      <div class="project-tech">
+        <span class="tech-tag">CNN</span>
+        <span class="tech-tag">TensorFlow</span>
+        <span class="tech-tag">Deep Learning</span>
+      </div>
+      <div class="project-title">Medical Image Classification</div>
+      <div class="project-desc">Deep learning model for healthcare image classification; achieved 92% accuracy in anomaly detection.</div>
+      <div class="project-metric">🏥 92% Accuracy</div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">06</div>
+      <div class="project-tech">
+        <span class="tech-tag">React</span>
+        <span class="tech-tag">AI</span>
+        <span class="tech-tag">Full Stack</span>
+      </div>
+      <div class="project-title">CogniVault — AI Knowledge Platform</div>
+      <div class="project-desc">Full-stack AI-powered knowledge management platform with intelligent search and organization.</div>
+      <a href="https://beunique564.github.io/CogniVault/" target="_blank" class="project-metric" style="text-decoration:none;display:inline-flex;">🔗 View Live</a>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-tag">04 / Academic Record</div>
+  <h2 class="section-title">Education</h2>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-year">2023 — 2026</div>
+      <div>
+        <div class="edu-degree">BCA — Data Science & AI (IBM Integrated)</div>
+        <div class="edu-institution">Shri Ramswaroop Memorial University, Lucknow</div>
+        <div class="edu-detail">Alumni Coordinator · Best Class Representative<br>Participated in national workshops on AI, ML, and Data Analytics at IIT Kanpur and multiple other institutions.</div>
+        <div class="edu-badge">🏆 Honored by HCL VP Mr. Sanjay Gupta & HoD Dr. Bineet Gupta</div>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">2021 — 2023</div>
+      <div>
+        <div class="edu-degree">O-Level — NIELIT (Govt. of India)</div>
+        <div class="edu-institution">XL Computer Institute, Lucknow</div>
+        <div class="edu-detail">Government-certified computer science certification from NIELIT (National Institute of Electronics and Information Technology).</div>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">2010 — 2023</div>
+      <div>
+        <div class="edu-degree">Primary & Secondary Education</div>
+        <div class="edu-institution">Army Public School, LBS Marg, Lucknow</div>
+        <div class="edu-detail">Ranked among the Top 2 nationally for academic excellence throughout schooling.</div>
+        <div class="edu-badge">🥇 Top 2 National Academic Ranking</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards">
+  <div class="section-tag">05 / Recognition</div>
+  <h2 class="section-title">Awards & Honors</h2>
+  <div class="awards-grid">
+    <div class="award-card">
+      <div class="award-icon">🏆</div>
+      <div class="award-title">Honored by HCL Vice President</div>
+      <div class="award-desc">Personally recognized by Mr. Sanjay Gupta (Corporate VP, HCL Technologies) for outstanding Data Science performance and academic excellence.</div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">🥇</div>
+      <div class="award-title">#1 Hackathon — IIT Kanpur</div>
+      <div class="award-desc">Secured first place in Hackathon Competition at National Workshop organized at IIT Kanpur, competing against top national talent.</div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">🎓</div>
+      <div class="award-title">Best Class Representative</div>
+      <div class="award-desc">Recognized as Best Class Representative and Alumni Coordinator at SRMU for leadership and academic contributions.</div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">📰</div>
+      <div class="award-title">Media Coverage</div>
+      <div class="award-desc">Featured in leading newspapers for inspiring academic performance and contribution to the student community at SRMU.</div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">✈️</div>
+      <div class="award-title">Maraal Aerospace — Exhibitor</div>
+      <div class="award-desc">Represented Maraal Aerospace at national-level aerospace exhibitions, showcasing indigenous solar-powered UAV for defence applications.</div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">🌟</div>
+      <div class="award-title">Top 2 Nationally</div>
+      <div class="award-desc">Ranked in the Top 2 nationally for academic excellence during school years at Army Public School, Lucknow.</div>
+    </div>
+  </div>
+</section>
+
+<!-- LINKS -->
+<section id="links">
+  <div class="section-tag">06 / Connect</div>
+  <h2 class="section-title">All Links</h2>
+  <div class="links-grid">
+    <a href="https://portfolio2-0-vmpr.onrender.com" target="_blank" class="link-card">
+      <div class="link-icon">🌐</div>
+      <div class="link-info"><div class="link-label">Portfolio</div><div class="link-url">portfolio2-0-vmpr.onrender.com</div></div>
+    </a>
+    <a href="https://github.com/BEunique564/VAIBHAV-DATA-SCIENCE" target="_blank" class="link-card">
+      <div class="link-icon">⌥</div>
+      <div class="link-info"><div class="link-label">GitHub</div><div class="link-url">github.com/BEunique564</div></div>
+    </a>
+    <a href="https://www.linkedin.com/in/vaibhav-gupta" target="_blank" class="link-card">
+      <div class="link-icon">in</div>
+      <div class="link-info"><div class="link-label">LinkedIn</div><div class="link-url">VAIBHAV GUPTA | LinkedIn</div></div>
+    </a>
+    <a href="https://beunique564.github.io/CogniVault/" target="_blank" class="link-card">
+      <div class="link-icon">🧠</div>
+      <div class="link-info"><div class="link-label">CogniVault</div><div class="link-url">beunique564.github.io/CogniVault</div></div>
+    </a>
+    <a href="https://aos2-0.onrender.com/" target="_blank" class="link-card">
+      <div class="link-icon">🚀</div>
+      <div class="link-info"><div class="link-label">AOS 2.0</div><div class="link-url">aos2-0.onrender.com</div></div>
+    </a>
+    <a href="https://vaibhav-data-science-mentorship.vercel.app/" target="_blank" class="link-card">
+      <div class="link-icon">📚</div>
+      <div class="link-info"><div class="link-label">DS Mentorship</div><div class="link-url">vaibhav-data-science-mentorship.vercel.app</div></div>
+    </a>
+    <a href="https://vaibhav-data-science-mentorship.vercel.app/vaibhav_projects.html" target="_blank" class="link-card">
+      <div class="link-icon">🔬</div>
+      <div class="link-info"><div class="link-label">Projects Showcase</div><div class="link-url">vaibhav_projects.html</div></div>
+    </a>
+    <a href="mailto:vaibhavgupta2542@gmail.com" class="link-card">
+      <div class="link-icon">✉</div>
+      <div class="link-info"><div class="link-label">Email (Personal)</div><div class="link-url">vaibhavgupta2542@gmail.com</div></div>
+    </a>
+    <a href="tel:+919919917791" class="link-card">
+      <div class="link-icon">📱</div>
+      <div class="link-info"><div class="link-label">Phone</div><div class="link-url">+91-9919917791</div></div>
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-tag">07 / Get In Touch</div>
+  <h2 class="section-title">Contact</h2>
+  <div class="contact-wrapper">
+    <div class="contact-info">
+      <div class="contact-item">
+        <span class="contact-item-icon">✉</span>
+        <div><div style="font-size:.65rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;">Personal Email</div>
+        <a href="mailto:vaibhavgupta2542@gmail.com">vaibhavgupta2542@gmail.com</a></div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-icon">🎓</span>
+        <div><div style="font-size:.65rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;">Academic Email</div>
+        <a href="mailto:vaibhavgupta202310101360195@srmu.ac.in">vaibhavgupta202310101360195@srmu.ac.in</a></div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-icon">📱</span>
+        <div><div style="font-size:.65rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;">Phone</div>
+        <a href="tel:+919919917791">+91-9919917791</a></div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-icon">📍</span>
+        <div><div style="font-size:.65rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;">Location</div>
+        <span>Lucknow, Uttar Pradesh, India</span></div>
+      </div>
+    </div>
+    <div class="contact-cta">
+      <div class="contact-cta-title">Open to<br><span style="color:var(--accent)">Global MNCs</span></div>
+      <div class="contact-cta-sub">Actively seeking Data Scientist / Data Analyst roles in FAANG companies, top MNCs, and high-growth startups. Target CTC: 90+ LPA.</div>
+      <button class="btn-primary" onclick="downloadCV()" style="margin:0 auto;display:inline-flex;">⬇ Download CV</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 Vaibhav Gupta · Data Scientist & AI Engineer</span>
+  <span>Lucknow, India · vaibhavgupta2542@gmail.com</span>
+</footer>
+
+<script>
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX - 5 + 'px';
+  cursor.style.top = e.clientY - 5 + 'px';
+  ring.style.left = e.clientX - 18 + 'px';
+  ring.style.top = e.clientY - 18 + 'px';
+});
+document.querySelectorAll('a,button').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    ring.style.width = '50px'; ring.style.height = '50px';
+    ring.style.borderColor = 'var(--accent)';
+  });
+  el.addEventListener('mouseleave', () => {
+    ring.style.width = '36px'; ring.style.height = '36px';
+  });
+});
+
+// Scroll indicator
+window.addEventListener('scroll', () => {
+  const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  document.getElementById('scrollIndicator').style.width = pct + '%';
+});
+
+// Download CV
+function downloadCV() {
+  const content = `VAIBHAV GUPTA
+Data Scientist & AI Engineer
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📧 vaibhavgupta2542@gmail.com  |  📧 vaibhavgupta202310101360195@srmu.ac.in
+📞 +91-9919917791  |  📍 Lucknow, India
+🌐 https://portfolio2-0-vmpr.onrender.com
+💼 LinkedIn: VAIBHAV GUPTA  |  ⌥ GitHub: github.com/BEunique564
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PROFESSIONAL SUMMARY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Results-driven Data Science & AI professional with expertise in Python, SQL, Machine
+Learning, and Business Intelligence. Mentored 70+ students in industry-ready Data
+Science skills. Proven track record in predictive modelling, analytics dashboards,
+and scalable data pipelines. Honoured by HCL Vice President Mr Sanjay Gupta and HoD
+Dr Bineet Gupta for academic excellence and leadership. Actively seeking Data
+Scientist / Data Analyst opportunities in global MNCs and FAANG companies.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CORE TECHNICAL SKILLS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Languages        : Python, SQL (MySQL), R, PostgreSQL
+ML/DL            : Scikit-learn, TensorFlow, BERT, CNN, NLP, Transformers
+Libraries        : NumPy, Pandas, Matplotlib, Seaborn
+Big Data         : Apache Spark, PySpark, Kafka, Hadoop HDFS, Databricks
+BI & Viz         : Power BI, Tableau, IBM Cognos, Semantic Modeling, Google Sheets
+ML Algorithms    : Linear/Logistic Regression, KNN, Decision Trees, Collaborative Filtering
+DevOps/Tools     : Git/GitHub, Jupyter Notebook, Flask, CI/CD, Agile
+Soft Skills      : Leadership, Mentoring, Communication, Problem Solving
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PROFESSIONAL EXPERIENCE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DATA SCIENCE MENTOR                                     6+ Months
+Hanumant Technology | Lucknow, India
+
+• Mentored 70+ students in Python, SQL, Machine Learning, and Data Analytics
+• Delivered hands-on projects using real-world datasets aligned with industry workflows
+• Enhanced learner placement readiness through curriculum design and project guidance
+
+DATA SCIENCE INTERN                                     3 Months
+Wayspire | Delhi, India
+
+• Developed classification models using Scikit-learn with measurable accuracy improvements
+• Executed data preprocessing, feature selection, and visualisation for business datasets
+• Collaborated on real-world problem statements following agile methodology
+
+MACHINE LEARNING INTERN                                 1 Month
+EliteTech | Remote
+
+• Implemented Linear Regression & KNN models for predictive analytics
+• Evaluated model performance using industry-standard metrics
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+KEY PROJECTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. PERSONALISED RECOMMENDATION SYSTEM | Python, Scikit-learn, Flask
+   Built movie recommendation engine using collaborative filtering; deployed via Flask API.
+   Achievement: 20% improvement in recommendation accuracy.
+
+2. FRAUD DETECTION PIPELINE | Python, SQL, ML
+   Developed ML pipeline to detect fraudulent transactions.
+   Achievement: 95% precision, reduced false positives significantly.
+
+3. CUSTOMER CHURN PREDICTION | Power BI, Python
+   Predicted telecom customer churn using ML models + BI dashboards.
+   Achievement: 88% accuracy, helped reduce attrition by 12%.
+
+4. SENTIMENT ANALYSIS CHATBOT | NLP, BERT, Transformers
+   Implemented chatbot using BERT for automated customer support.
+   Achievement: Automated 60% of queries with high satisfaction scores.
+
+5. MEDICAL IMAGE CLASSIFICATION | CNN, TensorFlow
+   Deep learning model for healthcare image anomaly detection.
+   Achievement: 92% accuracy in anomaly detection.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EDUCATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BCA — Data Science & AI (IBM Integrated)               2023 – 2026
+Shri Ramswaroop Memorial University, Lucknow
+• Alumni Coordinator | Best Class Representative
+• Honored by HCL Vice President Mr Sanjay Gupta & HoD Dr. Bineet Gupta
+• Participated in national workshops: AI, ML, Data Analytics at IIT Kanpur+
+
+O-Level (NIELIT — Govt. of India)                      2021 – 2023
+XL Computer Institute, Lucknow
+
+Army Public School, LBS Marg, Lucknow                 2010 – 2023
+• Ranked among Top 2 Nationally for academic excellence
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+AWARDS & RECOGNITION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+• Honored by HCL VP Mr. Sanjay Gupta for Data Science excellence
+• #1 Hackathon Winner at National Workshop, IIT Kanpur
+• Recognized by Dr. Bineet Gupta for leadership and academic achievements
+• Best Class Representative & Alumni Coordinator (SRMU)
+• Top 2 Nationally — Academic Excellence (Army Public School)
+• Featured in leading newspaper for inspiring academic performance
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PORTFOLIO & LINKS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Portfolio     : https://portfolio2-0-vmpr.onrender.com
+GitHub        : https://github.com/BEunique564/VAIBHAV-DATA-SCIENCE
+CogniVault    : https://beunique564.github.io/CogniVault/
+DS Mentorship : https://vaibhav-data-science-mentorship.vercel.app/
+AOS 2.0       : https://aos2-0.onrender.com/
+Projects      : https://vaibhav-data-science-mentorship.vercel.app/vaibhav_projects.html
+`;
+  const blob = new Blob([content], { type: 'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'Vaibhav_Gupta_CV.txt';
+  a.click();
+}
+
+// Intersection Observer for fade-in
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.skill-card,.project-card,.exp-item,.edu-card,.award-card,.link-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity .6s ease, transform .6s ease';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>
